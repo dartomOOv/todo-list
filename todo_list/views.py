@@ -1,5 +1,5 @@
 from django.shortcuts import redirect, get_object_or_404, render
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.views import generic
 
 from todo_list.forms import TaskForm
@@ -42,10 +42,8 @@ class CompleteUndoView(generic.ListView):
         else:
             task.status = True
         task.save()
-        context = {
-            "tasks": Task.objects.all()
-        }
-        return render(request, "todo_list/task_list.html", context=context)
+        res = reverse("todo:task-list")
+        return redirect(res)
 
 
 class TagListView(generic.ListView):
