@@ -1,3 +1,4 @@
+from django.shortcuts import redirect, get_object_or_404, render
 from django.urls import reverse_lazy
 from django.views import generic
 
@@ -30,6 +31,20 @@ class TaskDeleteView(generic.DeleteView):
     model = Task
     template_name = "todo_list/delete_confirm.html"
     success_url = reverse_lazy("todo:task-list")
+
+
+class CompleteUndoView(generic.ListView):
+    def get(self, request, *args, **kwargs):
+        task = get_object_or_404(Task, id=kwargs["pk"])
+        if task.status:
+            task.status = False
+        else:
+            task.status = True
+        task.save()
+        context = {
+            "tasks": Task.objects.all()
+        }
+        return render(request, "todo_list/task_list.html", context=context)
 
 
 class TagListView(generic.ListView):

@@ -9,10 +9,11 @@
         <h2 >{{ task.content }}
           {% if task.status %}
             <span class="text-success">Done</span>
-            <a style="float: right" class="btn btn-secondary mt-3" href="">Undo</a>
+            <a style="float: right" class="btn btn-secondary mt-3" href="{% url 'todo:complete-undo' task.id %}"
+            >Undo</a>
           {% else %}
             <span class="text-danger">Not done</span>
-            <a style="float: right" class="btn btn-success mt-3" href="">Complete</a>
+            <a style="float: right" class="btn btn-success mt-3" href="{% url 'todo:complete-undo' task.id %}">Complete</a>
           {% endif %}
         </h2>
       <p>Created: {{ task.date }}</p>
