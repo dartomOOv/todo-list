@@ -6,28 +6,28 @@
     {% for task in tasks %}
 
       <li class="list-group-item">
-        <h2 >{{ task.content }}
+        <h2>{{ task.content }}
           {% if task.status %}
             <span class="text-success">Done</span>
             <a style="float: right" class="btn btn-secondary mt-3" href="{% url 'todo:complete-undo' task.id %}"
             >Undo</a>
           {% else %}
             <span class="text-danger">Not done</span>
-            <a style="float: right" class="btn btn-success mt-3" href="{% url 'todo:complete-undo' task.id %}">Complete</a>
+            <a style="float: right" class="btn btn-success mt-3"
+               href="{% url 'todo:complete-undo' task.id %}">Complete</a>
           {% endif %}
         </h2>
-      <p>Created: {{ task.date }}</p>
-      <h5>
-        Tags: {{ task|join_tags }}
-        <a href="{% url 'todo:task-update' task.id %}">Update</a>
-        <a href="{% url 'todo:task-delete' task.id %}">Delete</a>
-        {% if task.deadline %}
-          <span class="text-danger">Deadline: {{ task.deadline }}</span>
-        {% endif %}
-      </h5>
+        <p>Created: {{ task.date }}</p>
+        <h5>
+          Tags: {{ task|join_tags }}
+          <a href="{% url 'todo:task-update' task.id %}">Update</a>
+          <a href="{% url 'todo:task-delete' task.id %}">Delete</a>
+          {% if task.deadline %}
+            <span class="text-danger">Deadline: {{ task.deadline }}</span>
+          {% endif %}
+        </h5>
       </li>
-
-
+      
     {% endfor %}
   </ul>
 {% endblock %}
