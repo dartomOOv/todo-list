@@ -1,0 +1,23 @@
+{% extends "base/base.html" %}
+{% load object_filters %}
+{% block content %}
+  <h1>Tags<a style="float: right" class="btn btn-primary" href="{% url 'todo:tag-create' %}">Add tag</a></h1>
+  <ul class="sidebar-nav list-group mt-3">
+    {% if tags %}
+      <table class="table">
+        <tr>
+          <th>Name</th>
+          <th>Update</th>
+          <th>Delete</th>
+        </tr>
+        {% for tag in tags %}
+          <tr>
+            <td>{{ tag.name }}</td>
+            <td><a href="{% url 'todo:tag-update' tag.id %}" class="btn btn-secondary">Update</a></td>
+            <td><a href="{% url 'todo:tag-delete' tag.id %}" class="btn btn-secondary">Delete</a></td>
+          </tr>
+        {% endfor %}
+      </table>
+    {% endif %}
+  </ul>
+{% endblock %}
