@@ -1,0 +1,29 @@
+{% extends "base/base.html" %}
+{% load object_filters %}
+{% block content %}
+  <h1>TODO list<a style="float: right" class="btn btn-primary" href="{% url 'todo:task-create' %}">Add task</a></h1>
+  <ul class="sidebar-nav list-group mt-3">
+    {% for task in tasks %}
+
+      <li class="list-group-item">
+        <h2 >{{ task.content }}
+          {% if task.status %}
+            <span class="text-success">Done</span>
+            <a style="float: right" class="btn btn-secondary mt-3" href="">Undo</a>
+          {% else %}
+            <span class="text-danger">Not done</span>
+            <a style="float: right" class="btn btn-success mt-3" href="">Complete</a>
+          {% endif %}
+        </h2>
+      <p>Created: {{ task.date }}</p>
+      <h5>
+        Tags: {{ task|join_tags }}
+        <a href="{% url 'todo:task-update' task.id %}">Update</a>
+        <a href="{% url 'todo:task-delete' task.id %}">Delete</a>
+      </h5>
+      </li>
+
+
+    {% endfor %}
+  </ul>
+{% endblock %}
