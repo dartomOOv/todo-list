@@ -1,1 +1,6 @@
 config/__pycache__/
+.idea/
+db.sqlite3
+todo_list/__pycache__/
+todo_list/migrations/__pycache__/
+todo_list/templatetags/__pycache__/
