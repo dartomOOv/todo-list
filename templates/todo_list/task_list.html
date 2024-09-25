@@ -21,6 +21,9 @@
         Tags: {{ task|join_tags }}
         <a href="{% url 'todo:task-update' task.id %}">Update</a>
         <a href="{% url 'todo:task-delete' task.id %}">Delete</a>
+        {% if task.deadline %}
+          <span class="text-danger">Deadline: {{ task.deadline }}</span>
+        {% endif %}
       </h5>
       </li>
 
